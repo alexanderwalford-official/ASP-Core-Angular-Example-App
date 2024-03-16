@@ -1,6 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  },
   "newProjectRoot": "projects",
   "projects": {
     "Training_App": {
@@ -136,6 +141,9 @@
   },
   "defaultProject": "Training_App",
   "cli": {
-    "analytics": "ac1ed830-74fd-4b95-91aa-fd99746f80ba"
+    "analytics": "ac1ed830-74fd-4b95-91aa-fd99746f80ba",
+    "cache": {
+      "enabled": false
+    }
   }
 }

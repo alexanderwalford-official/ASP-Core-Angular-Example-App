@@ -7,15 +7,32 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./testapi.component.css']
 })
 export class TestapiComponent {
-  public datas: ApiTestData[] = [];
+  public names: string[] = [];
+  public ages: number[] = [];
+  public dataLoaded: boolean = false;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<ApiTestData[]>(baseUrl + 'Basic/name').subscribe(result => {
-      this.datas = result;
-    }, error => console.error(error));
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+
+  fetchData() {
+    // make a HTTP request to fetch names from the API
+    this.http.get<string[]>(`${this.baseUrl}Basic/names`).subscribe(
+      result => {
+        this.names = result; // assign the retrieved names to the 'names' property
+        this.dataLoaded = true; // indicate that data has been loaded
+      },
+      error => {
+        console.error(error); // handle errors gracefully (e.g., display error message)
+      }
+    );
+
+    // make a HTTP request to fetch ages from the API
+    this.http.get<number[]>(`${this.baseUrl}Basic/ages`).subscribe(
+      result => {
+        this.ages = result; // assign the retrieved ages to the 'ages' property
+      },
+      error => {
+        console.error(error); // handle errors gracefully (e.g., display error message)
+      }
+    );
   }
-}
-
-interface ApiTestData {
-  name: string;
 }

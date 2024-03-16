@@ -1,22 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Training_App.Controllers
 {
     [Route("[controller]")]
     public class BasicController : Controller
     {
+        private readonly ILogger<BasicController> _logger;
+
+        public BasicController(ILogger<BasicController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet("")]
         public IActionResult Index()
         {
-            Console.WriteLine("GET");
-            return Ok("Index page!");
+            _logger.LogInformation("GET");
+            return Ok("Index API page for basic controller.");
         }
 
-        [HttpGet("name")]
-        public string Name()
+        [HttpGet("names")]
+        public IEnumerable<string> GetNames()
         {
-            return "Jeff";
+            _logger.LogInformation("GET NAMES");
+            string[] names = { "Steve", "Josh", "Jen", "Mark", "Ben", "Harry", "Natalie" };
+            return names;
         }
+
+        [HttpGet("ages")]
+        public IEnumerable<int> GetAges()
+        {
+            _logger.LogInformation("GET AGES");
+            int[] ages = { 23, 54, 65, 24, 56, 18, 62 };
+            return ages;
+        }
+
     }
 }

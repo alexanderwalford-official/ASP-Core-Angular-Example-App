@@ -1,4 +1,3 @@
-// test.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent {
-  // Component logic here
+  toggleChanged(event: any) {
+    if (event.checked) {
+      alert("You toggled the switch on!");
+    }
+    else {
+      alert("You toggled the switch off!");
+    }
+  }
 }

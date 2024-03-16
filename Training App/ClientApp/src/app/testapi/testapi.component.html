@@ -1,20 +1,21 @@
 <h2>Test API</h2>
-<p>Now press the button to test the API request button:</p>
-<button mat-raised-button color="primary" onclick="">API Request</button>
+<p>Now press the button to test the API request:</p>
+<button mat-raised-button color="primary" (click)="fetchData()">API Request</button>
 <p id="request_response"></p>
 
+<p *ngIf="!dataLoaded"><em>Data will display after button click...</em></p>
 
-<p *ngIf="!datas"><em>Loading...</em></p>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="datas">
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="dataLoaded">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Age</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of datas">
-      <td>{{ data.name }}</td>
+    <tr *ngFor="let name of names; let i = index">
+      <td>{{ name }}</td>
+      <td>{{ ages[i] }}</td>
     </tr>
   </tbody>
 </table>

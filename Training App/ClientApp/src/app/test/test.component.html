@@ -1,4 +1,4 @@
 <p>This is not an API page but a static angular page, this is entirely operated in the front end of the application.</p>
 <p>APIs are handled by the ASP server controllers and you can pass arguments into them.</p>
 
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleChanged($event)">Toggle me!</mat-slide-toggle>
