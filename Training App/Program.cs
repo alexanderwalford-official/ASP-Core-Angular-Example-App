@@ -1,30 +1,40 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using Training_App;
 
-// Add services to the container.
+public class Program {
+    public static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllersWithViews();
+        // add services to the container.
 
-var app = builder.Build();
+        builder.Services.AddControllersWithViews();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    Console.WriteLine("DEV MODE");
+        var app = builder.Build();
+
+        // configure the HTTP request pipeline.
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            Console.WriteLine("DEV MODE");
+        }
+
+        app.UseStaticFiles();
+        app.UseRouting();
+
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller}/{action=Index}/{id?}");
+
+        Console.WriteLine("Mapped controllers!");
+
+        app.MapFallbackToFile("index.html"); ;
+
+        Console.WriteLine("Aplication now starting..");
+        await app.RunAsync();
+    }
 }
-
-app.UseStaticFiles();
-app.UseRouting();
-
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
-Console.WriteLine("Mapped controllers!");
-
-app.MapFallbackToFile("index.html"); ;
-
-Console.WriteLine("Aplication now starting..");
-app.Run();
 
