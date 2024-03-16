@@ -1,0 +1,20 @@
+<h2>Test API</h2>
+<p>Now press the button to test the API request button:</p>
+<button mat-raised-button color="primary" onclick="">API Request</button>
+<p id="request_response"></p>
+
+
+<p *ngIf="!datas"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="datas">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of datas">
+      <td>{{ data.name }}</td>
+    </tr>
+  </tbody>
+</table>
